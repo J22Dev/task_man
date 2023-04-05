@@ -17,4 +17,12 @@ export const JWT_CONFIG = {
   },
 };
 
+export const COOKIE_CONFIG = {
+  httpOnly: true,
+  secure: process.env.NODE_ENV?.toLocaleLowerCase() === "production",
+  maxAge:
+    1000 * 60 * 60 * 24 * parseInt(JWT_CONFIG.REFRESH.EXPIRES_IN.split("")[0]) -
+    1000 * 60 * 60, // Days - 1 hr
+};
+
 export const OBJECT_STORAGE_CONFIG = {};

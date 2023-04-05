@@ -36,10 +36,10 @@ export const signRefreshToken = (p: JWT_PAYLOAD) =>
 export const verifyToken = async ({
   type,
   payload,
-}: VERIFY_JWT_PAYLOAD): Promise<Error | JWT_PAYLOAD> => {
+}: VERIFY_JWT_PAYLOAD): Promise<false | JWT_PAYLOAD> => {
   return new Promise((res, rej) => {
     jwt.verify(payload, getConfig(type).SECRET, (err, decoded) => {
-      if (err) rej(new Error("Token Not Valid"));
+      if (err) res(false);
       res(decoded as JWT_PAYLOAD);
     });
   });
